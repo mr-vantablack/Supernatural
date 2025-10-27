@@ -1,11 +1,13 @@
 package net.salju.supernatural.block;
 
+import net.minecraft.network.chat.Component;
 import net.salju.supernatural.init.SupernaturalItems;
 import net.salju.supernatural.init.SupernaturalEnchantments;
 import net.salju.supernatural.init.SupernaturalConfig;
 import net.salju.supernatural.init.SupernaturalBlockEntities;
 import net.salju.supernatural.events.SupernaturalManager;
-import net.minecraft.world.phys.shapes.VoxelShape;
+
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.BlockHitResult;
@@ -32,8 +34,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-import javax.annotation.Nullable;
-import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import java.util.Map;
 import java.util.List;
 import net.minecraft.world.item.context.BlockPlaceContext;
 
@@ -85,6 +89,13 @@ public class RitualBlock extends BaseEntityBlock {
 								stack.shrink(1);
 							}
 						} else {
+                            if(target.isOnCooldown()){
+                                player.displayClientMessage(
+                                        Component.literal(target.getCooldownMessage()),
+                                        true
+                                );
+                                return InteractionResult.FAIL;
+                            }
 							Rituals.doRitual(target.getItem(0), stack, lvl, player, pos);
 						}
 					} else {
@@ -146,4 +157,4 @@ public class RitualBlock extends BaseEntityBlock {
 	public RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
-}
+}

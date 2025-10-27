@@ -3,7 +3,8 @@ package net.salju.supernatural.entity;
 import net.salju.supernatural.init.SupernaturalItems;
 import net.salju.supernatural.init.SupernaturalConfig;
 import net.salju.supernatural.events.SupernaturalManager;
-import net.minecraft.world.phys.Vec3;
+
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.Level;
@@ -35,7 +36,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.BlockPos;
-import java.util.List;
+
+import java.util.List;
 
 public class Angel extends Mob {
 	public static final EntityDataAccessor<Integer> POSE = SynchedEntityData.defineId(Angel.class, EntityDataSerializers.INT);
@@ -97,6 +99,9 @@ public class Angel extends Mob {
 		if (check || source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(DamageTypes.EXPLOSION) || source.isCreativePlayer() || source.getEntity() instanceof Creeper) {
 			return super.hurt(source, amount);
 		}
+        if (source.is(DamageTypes.MAGIC)){
+            return super.hurt(source, amount);
+        }
 		return false;
 	}
 
@@ -245,7 +250,8 @@ public class Angel extends Mob {
 
 	private void showBreakingParticles() {
 		if (this.level() instanceof ServerLevel lvl) {
-			lvl.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.STONE.defaultBlockState()), this.getX(), this.getY(0.35D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
+			lvl.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.STONE.defaultBlockState()), this.getX(), this.getY(0.35D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F),
+ (double) (this.getBbWidth() / 4.0F), 0.05D);
 		}
 	}
-}
+}

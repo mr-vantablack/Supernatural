@@ -1,7 +1,10 @@
 package net.salju.supernatural.block;
 
+import net.minecraft.client.particle.Particle;
+import net.minecraft.core.particles.ParticleOptions;
 import net.salju.supernatural.init.SupernaturalBlockEntities;
-import net.minecraft.world.level.block.state.BlockState;
+
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.Items;
@@ -25,15 +28,72 @@ import net.minecraft.world.entity.ai.behavior.UpdateActivityFromSchedule;
 public class RitualBlockEntity extends BaseContainerBlockEntity {
 	private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
 	private static int timer = 0;
+    private long lastUsedTime = 0;
+    private long cooldownDuration;
 
 	public RitualBlockEntity(BlockPos pos, BlockState state) {
 		super(SupernaturalBlockEntities.RITUAL.get(), pos, state);
+        setCooldownDuration(400);
 	}
+    public void doCooldown(){
+        if (level != null) this.lastUsedTime = level.getGameTime();
+    }
+    public void setCooldownDuration(int duration) {
+        this.cooldownDuration = duration;
+    }
+    public boolean isOnCooldown() {
+        if (level == null) return false;
+        return level.getGameTime() - lastUsedTime < cooldownDuration;
+    }
+    public long getRemainingCooldown() {
+        if (level == null) return 0;
+        return Math.max(0, cooldownDuration - (level.getGameTime() - lastUsedTime));
+    }
+    public String getCooldownMessage() {
+        if (level == null) return "";
+        long ticksLeft = getRemainingCooldown();
+        long secondsLeft = (ticksLeft + 19) / 20;
+        var pos = getBlockPos();
+        spawnParticles(level, pos, ParticleTypes.SMOKE, 2, 0.3, 0.02);
+      /*
+         if (level.random.nextInt(5) == 0) {
+            spawnParticles(level, pos, ParticleTypes.PORTAL, 1, 0.1, 0.01);
+        }
 
+        if (secondsLeft > 60) {
+            long minutes = secondsLeft / 60;
+            long seconds = secondsLeft % 60;
+            return String.format("§4Нет ответа... %d:%02d", minutes, seconds);
+        } else {
+            return String.format("§4Нет ответа... %d сек.", secondsLeft);
+        }*/
+        return "";
+    }
+    private void spawnParticles(Level level, BlockPos pos, ParticleOptions particle,
+                                int count, double spread, double speed) {
+        if (level.isClientSide()) {
+            for (int i = 0; i < count; i++) {
+                double x = pos.getX() + 0.5 + (level.random.nextDouble() - 0.5) * spread;
+                double y = pos.getY() + 1.0 + (level.random.nextDouble() - 0.5) * spread * 0.5;
+                double z = pos.getZ() + 0.5 + (level.random.nextDouble() - 0.5) * spread;
+
+                level.addParticle(particle, x, y, z,
+                        (level.random.nextDouble() - 0.5) * speed,
+                        level.random.nextDouble() * speed,
+                        (level.random.nextDouble() - 0.5) * speed);
+            }
+        } else {
+            ServerLevel serverLevel = (ServerLevel) level;
+            serverLevel.sendParticles(particle,
+                    pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
+                    count, spread, spread * 0.5, spread, speed);
+        }
+    }
 	@Override
 	public void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		ContainerHelper.saveAllItems(tag, this.stacks);
+        tag.putLong("LastUsedTime", lastUsedTime);
 	}
 
 	@Override
@@ -41,6 +101,7 @@ public class RitualBlockEntity extends BaseContainerBlockEntity {
 		super.load(tag);
 		this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		ContainerHelper.loadAllItems(tag, this.stacks);
+        this.lastUsedTime = tag.getLong("LastUsedTime");
 	}
 
 	@Override
@@ -143,7 +204,7 @@ public class RitualBlockEntity extends BaseContainerBlockEntity {
 	}
 
 	public static void tick(Level world, BlockPos pos, BlockState state, RitualBlockEntity target) {
-		if (world instanceof ServerLevel lvl && !target.isEmpty()) {
+		if (world instanceof ServerLevel lvl && !target.isEmpty() && !target.isOnCooldown()) {
 			++target.timer;
 			if (target.timer >= 5) {
 				lvl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, (pos.getX() + 0.5), (pos.getY() + 0.5), (pos.getZ() + 0.5), 2, 0.1, 0.15, 0.1, 0);
@@ -151,4 +212,4 @@ public class RitualBlockEntity extends BaseContainerBlockEntity {
 			}
 		}
 	}
-}
+}
