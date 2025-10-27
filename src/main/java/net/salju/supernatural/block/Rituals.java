@@ -101,7 +101,7 @@ public class Rituals {
                 else if (i == 12 && e >= 1 && (stack.is(Items.IRON_INGOT) || stack.is(Items.COPPER_INGOT))) {
 					defaultResult(target, offer, lvl, player, pos);
 					target.setItem(0, new ItemStack(stack.is(Items.IRON_INGOT) ? Items.GOLD_INGOT : Items.IRON_INGOT));
-				} else if (i == 8 && e >= 1 && stack.is(SupernaturalItems.VAMPIRE_DUST.get())) {
+				} else if (i == 12 && e >= 1 && stack.is(SupernaturalItems.VAMPIRE_DUST.get())) {
 					defaultResult(target, offer, lvl, player, pos);
 					BlockPos top = BlockPos.containing((pos.getX() + 3), (pos.getY() - 1), (pos.getZ() + 3));
 					BlockPos bot = BlockPos.containing((pos.getX() - 3), (pos.getY() - 1), (pos.getZ() - 3));
