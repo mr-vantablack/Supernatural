@@ -220,6 +220,7 @@ public class Rituals {
 
             defaultResult(target, offer, lvl, player, pos);
             target.setItem(0, new ItemStack(getItem("biomesoplenty", "blood_bucket")));
+
         }
     }
     private static void chaosRituals(ItemStack stack, ItemStack offer, ServerLevel lvl, Player player, BlockPos pos, RitualBlockEntity target, int i, int e){
