@@ -1,2 +1,57 @@
 # Supernatural
-Minecraft Java Edition Supernatural Mod
+
+Теперь после каждого ритуала, алтарь уйдет на кулдаун, время которого зависит от уровня камня души (![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png)) который вы использовали (чем выше - тем дольше).
+Вокруг алтаря должно быть 20 свечей, в скобках указано лишь количество свечей которых необходимо зажечь для ритуала.
+Для ритуалов которые дают эффекты необходимо держать кровь жертвы в левой руке.
+
+# Новые ритуалы
+## Supernatural:
+- Ритуалы 1 уровня (Мелкий ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Бутылочка опыта > эктоплазма (8 свечей)
+  - Слиток бронзы > слиток железа > слиток золота (12 свечей)
+  - Вампирская пыль > песок душ вокруг алтаря превратится в могильную почву (12 свечей)
+- Ритуалы 2 уровня (Малый ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Пластинка 13 > пластинка 11 (12 свечей)
+  - Обсидиан > плачущий обсидиан (12 свечей)
+- Ритуалы 3 уровня (Средний ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Блок редстоуна > блок лазурита (12 свечей)
+  - Огненный порошок + кровь жертвы > эффект силы (16 свечей)
+- Ритуалы 4 уровня (Большой ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Сгусток магмы + кровь жертвы > эффект огнестойкости (12 свечей)
+  - Эктоплазма + кровь жертвы > эффект одержимости (12 свечей)
+  - Гнилая плоть + кровь жертвы > эффект голода (12 свечей)
+  - Алмаз + кровь жертвы > эффект спешки (12 свечей)
+  - Тыква + кровь жертвы > надеть тыкву на голову жертвы (12 свечей)
+- Ритуалы 5 уровня (Великий ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Золотое яблоко > зачарованное золотое яблоко (20 свечей)
+  - Стойка для брони > статуя ангела (20 свечей)
+  - Ваша кровь в алтаре + козёл у алтаря > стать вампиром (20 свечей)
+  - Кость + кровь жертвы > эффект иссушения и отравления (20 свечей)
+  - Звезда незера + кровь жертвы > много положительных эффектов (20 свечей)
+## Biomes O Plenty:
+- Ритуалы 1 уровня (Мелкий ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Саженец дуба > саженец мёртвого дерева (8 свечей)
+  - Саженец пихты > саженец ужасного дерева (8 свечей)
+  - Блок коричневого/красного гриба > блок светящегося гриба (8 свечей)
+  - Блок мха > блок светящегося мха (8 свечей)
+  - Незерак > плоть (8 свечей)
+- Ритуалы 2 уровня (Малый ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Ведро воды > ведро крови (12 свечей)
+## Born In Chaos:
+- Ритуалы 1 уровня (Мелкий ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Кожа > кожа монстра (8 свечей)
+  - Стержень ифрита > тёмный стержень (8 свечей)
+  - Незеритовый лом > кусочек тёмного металла (8 свечей)
+- Ритуалы 3 уровня (Средний ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Тотем бессмертия > тотем смерти (12 свечей)
+  - Уголь > тлеющий уголёк скверны (12 свечей)
+- Ритуалы 4 уровня (Большой ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Клык вожака гончих + кровь жертвы > эффект ярости (12 свечей)
+  - Глаз рыбы проглота + кровь жертвы > эффект слепоты (20 свечей)
+  - Бесплотный дух + кровь жертвы > эффект проклятия (16 свечей)
+  - Трупный опарыш + кровь жертвы > эффект... гниения? (16 свечей)
+- Ритуалы 5 уровня (Великий ![soulgem](https://github.com/mr-vantablack/Supernatural/blob/main/src/main/resources/assets/supernatural/textures/item/soulgem.png))
+  - Кости похитителя жизни + кровь жертвы > эффект вампиризма (20 свечей)
+  - Сфера призывателя + кровь жертвы > какой то страшный эффект (20 свечей)
+  - Трансмутирующий эликсир + кровь жертвы > какой то имбалансный эффект (20 свечей)
+  - Почва скверны + кровь жертвы > эффект инфернального огня (20 свечей)
